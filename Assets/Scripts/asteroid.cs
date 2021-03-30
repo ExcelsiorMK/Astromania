@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class asteroid : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class asteroid : MonoBehaviour
     public float screenRight;
     public float screenTop;
     public float screenBottom;
+    public int points;
+    public GameObject player;
 
 
     private int count;
@@ -24,6 +27,7 @@ public class asteroid : MonoBehaviour
         rb.AddForce(thrust);
         rb.AddTorque(torque);
         count = 0;
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -56,6 +60,8 @@ public class asteroid : MonoBehaviour
             Debug.Log("Hit reg");
             count++;
             Debug.Log("Count: " + count);
+            player.SendMessage("Scorepoints",points);
+
             Destroy(gameObject);
         }
     }

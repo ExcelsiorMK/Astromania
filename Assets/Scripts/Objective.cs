@@ -29,12 +29,5 @@ public class Objective : MonoBehaviour
             health--;
             Debug.Log("Health: " + health);
         }
-        else if(collision.tag == "Enemy")
-        {
-            Debug.Log("Hit by Enemy");
-            health--;
-            Debug.Log("Health: " + health);
-            Destroy(collision.gameObject);
-        }
     }
 }
