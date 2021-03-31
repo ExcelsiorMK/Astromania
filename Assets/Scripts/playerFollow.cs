@@ -6,15 +6,12 @@ using UnityEngine.UI;
 public class playerFollow : MonoBehaviour
 {
     public int score;
-    public text scoreText;
-    
+    public Text scoreText;
     // Start is called before the first frame update
     void Start()
-
     {
         Cursor.visible = false;
         score = 0;
-       
     }
 
     // Update is called once per frame
@@ -23,9 +20,10 @@ public class playerFollow : MonoBehaviour
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = pos;
     }
-    void ScorePoints(int pointsToAdd)
+    public void ScorePoints(int pointToAdd)
     {
-    score += pointsToAdd;
-    scoreText.text= "Score" + score;
+        Debug.Log("Score added");
+        score += pointToAdd;
+        scoreText.text = "" + score;
     }
 }

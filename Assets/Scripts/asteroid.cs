@@ -14,11 +14,12 @@ public class asteroid : MonoBehaviour
     public float screenRight;
     public float screenTop;
     public float screenBottom;
-    public int points;
+
     public GameObject player;
+    public int point;
 
+    public ParticleSystem particle;
 
-    private int count;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +27,6 @@ public class asteroid : MonoBehaviour
         float torque = Random.Range(-maxTorque, maxTorque);
         rb.AddForce(thrust);
         rb.AddTorque(torque);
-        count = 0;
-        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -55,14 +54,17 @@ public class asteroid : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag=="Player")
+        if (collision.tag == "Player")
         {
-            Debug.Log("Hit reg");
-            count++;
-            Debug.Log("Count: " + count);
-            player.SendMessage("Scorepoints",points);
-
-            Destroy(gameObject);
+            
+            Destroy();
+            
         }
+    }
+    void Destroy()
+    {
+        player.GetComponent<playerFollow>().ScorePoints(point);
+        Instantiate(particle, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
